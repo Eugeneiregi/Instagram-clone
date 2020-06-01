@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-frm .models import *
+from .models import *
 
 
 
