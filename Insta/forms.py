@@ -1,36 +1,22 @@
 from django import forms
-from .models import Image,Profile,Comments
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django import forms
+from Insta.models import Profile, Comment
 
-class NewsLetterForm(forms.Form):
-    your_name = forms.CharField(label='First Name',max_length=30)
-    email = forms.EmailField(label='Email')
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
 
-class NewImageForm(forms.ModelForm):
     class Meta:
-        model = Image
-        exclude = ['editor', 'pub_date','profile','likes','comments','followers']
-        widgets = {
-            'tags': forms.CheckboxSelectMultiple(),
-        }
-class NewProfileForm(forms.ModelForm):
-    class Meta:
-        model=Profile
-        exclude=['editor']
-        widgets={
-            'tags':forms.CheckboxSelectMultiple(),
-        }
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
-class UpdateProfileForm(forms.ModelForm):
+class ProfileEditForm(forms.ModelForm):
     class Meta:
-        model=Profile
-        exclude=['editor']
-        widgets={
-            'tags':forms.CheckboxSelectMultiple(),
-        }
-        
-class NewCommentForm(forms.ModelForm):
+        model = Profile
+        fields = ['image','profile_caption']
+
+class CommentForm(forms.ModelForm):
     class Meta:
-        model=Comments
-        exclude=['editor']
-      
-       
+        model = Comment
+        fields = ['author','post','body']
