@@ -6,6 +6,6 @@ from django.conf.urls import url
 
 
 urlpatterns =  [
-    url('', views, name='index'),
+    url('', views.index, name='index'),
 
 ]
